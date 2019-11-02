@@ -1,6 +1,9 @@
 package com.yuer.auth.toekn.authtoekn.controller;
 
 import com.yuer.auth.toekn.authtoekn.auth.Login;
+import com.yuer.auth.toekn.authtoekn.utils.RedisUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.Mapping;
@@ -21,7 +24,8 @@ import javax.servlet.http.HttpSession;
 @Controller
 @RequestMapping("/UserContrller")
 public class UserContrller {
-
+    @Autowired
+    RedisTemplate redisTemplate;
 
 
     @ResponseBody
@@ -29,6 +33,7 @@ public class UserContrller {
     @Login
     public String questUserInfo(HttpSession session){
         session.setAttribute("user",null);
+        new RedisUtils().set("user","user");
         return "str";
     }
 

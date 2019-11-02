@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan(basePackages = {"com.yuer.*"})
-@Aspect//开启切面Aop
+//@ComponentScan(basePackages = {"com.yuer.*"})
+//@Aspect//开启切面Aop
 public class AuthtoeknApplication {
 
     public static void main(String[] args) {
