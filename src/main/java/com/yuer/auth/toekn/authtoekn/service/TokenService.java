@@ -10,6 +10,9 @@ import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+
+import javax.annotation.Resource;
 
 //import com.zretc.auth.arauthzretc.api.vo.TokenVo;
 //import com.zretc.auth.arauthzretc.api.vo.UserInfo;
@@ -26,7 +29,7 @@ public class TokenService {
     private static Logger logger = LoggerFactory.getLogger(TokenService.class);
 
 
-    @Autowired
+    @Resource
     RedisTemplate<String, Object> redisTemplate;
 
 
@@ -34,6 +37,7 @@ public class TokenService {
 
 
     public TokenVo generatorToken(String userId, String phone) {
+//        RedisTemplate<String, Object> redisTemplate = new  RedisTemplate<String, Object>();
         HashOperations<String, Object, Object> hashOperations = redisTemplate.opsForHash();
         RedisTemplate<String,Object> redis = new RedisTemplate<String,Object>();
         HashOperations<String, String, String> hashOps = redis.opsForHash();
@@ -44,5 +48,12 @@ public class TokenService {
         return t;
     }
 
-
+    public String generatorToken2(String userId, String phone) {
+        redisTemplate.opsForValue().set("1111", "2222");
+        String rel = (String) redisTemplate.opsForValue().get("1111");
+        if(!StringUtils.isEmpty(rel)){
+            return "你好，我成功啦 ： " +rel;
+        }
+        return "你好，faild ~~" ;
+    }
 }
